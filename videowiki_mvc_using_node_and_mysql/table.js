@@ -44,8 +44,8 @@ knex.schema.hasTable('user_post').then((exists) => {
     if (!exists) {
         return knex.schema.createTable('user_post', (table) => {
             table.increments('id')
-            table.string('likes')
-            table.string('Dislikes')
+            table.integer('likes')
+            table.integer('Dislikes')
             table.string('comments')
         })
         .catch((err) => {

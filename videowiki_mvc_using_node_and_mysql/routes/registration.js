@@ -82,6 +82,29 @@ registration.post('/create_post/:registration_id', (req,res) => {
 });
 
 // 4
+registration.post('/create_data/:user_id', (req,res) => {
+    let user_id = req.params.user_id
+    let data = registrationDB.get_data(user_id)
+    data.then((data)=> {
+        var id_data = data[0]["user_id"]
+    let create = {
+        id : id_data,
+        likes : req.body.likes,
+        Dislikes : req.body.Dislikes,
+        comments : req.body.comments
+    }
+    registrationDB.create_data(create)
+    .then(()=>{
+        res.send('insert')
+    }).catch((err)=>{
+        res.send(err)
+    })
+    })
+});
 
+// 5
+registration.get('/get_data', (req,res) => {
+    
+})
 
 module.exports = registration
