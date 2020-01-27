@@ -118,27 +118,8 @@ registration.get('/get_data/:id', (req,res) => {
     else if (Dislikes == 1){
         Dislikes_counter += 1
         res.json({Dislikes_counter})
-
     }
     })
 });
 
 module.exports = registration
-
-
-
-// videowiki.get("/get/:post_id",(req,res)=>{
-//     let post_id=req.params.post_id;
-//     let selectPost=postvideowiki.dataByUserId(post_id)
-//     selectPost.then((result)=>{
-//         let counter=0
-//         for(let i = 0; i<result.length; i++) {
-//             if(result[i]["likes"]==1){
-//                 counter+=1
-//             }
-//        }
-//         return res.json({"massage":"likes_count","like":counter});
-//     }).catch((err)=>{
-//         res.send(err)
-//     });
-// })
