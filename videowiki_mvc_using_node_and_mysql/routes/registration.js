@@ -103,8 +103,42 @@ registration.post('/create_data/:user_id', (req,res) => {
 });
 
 // 5
-registration.get('/get_data', (req,res) => {
-    
-})
+registration.get('/get_data/:id', (req,res) => {
+    let id = req.params.id;
+    let post_data = registrationDB.dataUserId(id)
+    post_data.then((result)=>{
+        var likes = result[0]['likes']
+        var Dislikes = result[0]['Dislikes']
+   var likes_counter = 0
+    var Dislikes_counter = 0
+    if (likes == 1){
+        likes_counter += 1
+        res.json({likes_counter})
+    }
+    else if (Dislikes == 1){
+        Dislikes_counter += 1
+        res.json({Dislikes_counter})
+
+    }
+    })
+});
 
 module.exports = registration
+
+
+
+// videowiki.get("/get/:post_id",(req,res)=>{
+//     let post_id=req.params.post_id;
+//     let selectPost=postvideowiki.dataByUserId(post_id)
+//     selectPost.then((result)=>{
+//         let counter=0
+//         for(let i = 0; i<result.length; i++) {
+//             if(result[i]["likes"]==1){
+//                 counter+=1
+//             }
+//        }
+//         return res.json({"massage":"likes_count","like":counter});
+//     }).catch((err)=>{
+//         res.send(err)
+//     });
+// })

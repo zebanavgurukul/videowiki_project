@@ -32,4 +32,9 @@ let create_data = (create) =>{
     return knex('user_post').insert(create)
 };
 
-module.exports = {registration,registration_login,else_login,create,create_post_data,get_data,create_data}
+// 5
+let dataUserId = (id)=>{
+    return knex.select('user_post.likes',"Dislikes").from("user_post").where('id',id)
+}
+
+module.exports = {registration,registration_login,else_login,create,create_post_data,get_data,create_data,dataUserId}
