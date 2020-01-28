@@ -20,25 +20,34 @@ let create_post_data = (registration_id)=>{
 };
 
 let create = (create_data) =>{
-    return knex('user').insert(create_data)
+    return knex('user_post').insert(create_data)
 };
 
 // 4
 let create_data = (create) =>{
-    return knex('user_post').insert(create)
+    return knex('post').insert(create)
+};
+
+// 5
+let get_data = (registration_id) => {
+    return knex('reg')
+    .join("user_post","reg.registration_id","=","user_post.registration_id")
+    .join('post','user_post.post_id','=', 'post.post_id')
+    .select('reg.registration_id','email','password','first_name','last_name','user_post.post_id','img_url','caption','post.id','likes','Dislikes','comments')
+    .where('reg.registration_id',registration_id)
 };
 
 // 5
 let dataUserId = (id) => {
-    return knex.select('*').from("user_post").where('id',id)
+    return knex.select('*').from("post").where('id',id)
 };
 
 // 6
 let reverse_data = (registration_id) => {
     return knex('reg')
-    .join("user","reg.registration_id","=","user.registration_id")
-    .join('user_post','user.user_id','=', 'user_post.user_id')
-    .select('reg.registration_id','email','password','first_name','last_name','user.user_id','img_url','caption','user_post.id','likes','Dislikes','comments')
+    .join("user_post","reg.registration_id","=","user_post.registration_id")
+    .join('post','user_post.post_id','=', 'post.post_id')
+    .select('reg.registration_id','email','password','first_name','last_name','user_post.post_id','img_url','caption','post.id','likes','Dislikes','comments')
     .where('reg.registration_id',registration_id)
 };
 
@@ -47,4 +56,4 @@ let post_bio = (post_data) => {
     return knex('bio').insert(post_data)
 };
 
-module.exports = {registration,registration_login,else_login,create,create_post_data,create_data,dataUserId,reverse_data,post_bio}
+module.exports = {registration,registration_login,else_login,create,create_post_data,get_data,create_data,dataUserId,reverse_data,post_bio}

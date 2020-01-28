@@ -26,10 +26,10 @@ knex.schema.hasTable('reg').then((exists) => {
     return console.log('table is created!')
 });
 
-knex.schema.hasTable('user').then((exists) => {
+knex.schema.hasTable('user_post').then((exists) => {
     if (!exists) {
-        return knex.schema.createTable('user', (table) => {
-            table.increments('user_id')
+        return knex.schema.createTable('user_post', (table) => {
+            table.increments('post_id')
             table.integer('registration_id')
             table.string('img_url')
             table.string('caption')
@@ -41,11 +41,11 @@ knex.schema.hasTable('user').then((exists) => {
     return console.log('table is created!')
 });
 
-knex.schema.hasTable('user_post').then((exists) => {
+knex.schema.hasTable('post').then((exists) => {
     if (!exists) {
-        return knex.schema.createTable('user_post', (table) => {
+        return knex.schema.createTable('post', (table) => {
             table.integer('registration_id')
-            table.integer('user_id')
+            table.integer('post_id')
             table.increments('id')
             table.integer('likes')
             table.integer('Dislikes')

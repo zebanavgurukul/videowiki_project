@@ -78,10 +78,10 @@ registration.post("/registration_login",(req,res)=>{
 registration.post('/create_post/:registration_id', (req,res) => {
     let registration_id = req.params.registration_id
     let data = registrationDB.create_post_data(registration_id)
-    data.then((data)=> {
+    data.then((data) => {
         var id_data = data[0]["registration_id"]
     let create_data = {
-        user_id : req.body.user_id,
+        post_id : req.body.post_id,
         registration_id : id_data,
         img_url : req.body.img_url,
         caption : req.body.caption
@@ -99,8 +99,8 @@ registration.post('/create_post/:registration_id', (req,res) => {
 registration.post('/create_data', (req,res) => {
     let create = {
         registration_id : req.body.registration_id,
-        user_id : req.body.user_id,
-        id : req.body.create_data,
+        post_id : req.body.post_id,
+        id : req.body.id,
         likes : req.body.likes,
         Dislikes : req.body.Dislikes,
         comments : req.body.comments
@@ -112,6 +112,28 @@ registration.post('/create_data', (req,res) => {
         res.send(err)
     })
 });
+
+// 5
+registration.get('/data_get/:registration_id', (req,res) => {
+    let registration_id = req.params.registration_id;
+    let data = registrationDB.get_data(registration_id)
+    data.then((result) => {
+        let likes_counter = 0
+        for(let i = 0; i<result.length; i++) {
+            if(result[i]['likes'] == 1){
+                likes_counter += 1
+            }
+        }
+        res.send({likes_counter})
+        let Dislikes_counter = 0
+        for(let j = 0; j < result.length; j++) {
+            if (result[j]['Dislikes'] == 1){
+                Dislikes_counter += 1
+            }
+        }
+        res.send({Dislikes_counter})
+    })
+})
 
 // 5
 registration.get('/get_data/:id', (req,res) => {
@@ -137,7 +159,9 @@ registration.get('/get_data/:id', (req,res) => {
 registration.get('/reverse/:registration_id',(req,res) => {
     let registration_id = req.params.registration_id
     let reverse_data_post = registrationDB.reverse_data(registration_id)
-    reverse_data_post.then((data)=>{
+    reverse_data_post.then((data) => {
+        const reversed = data.reverse();
+        console.log(reversed)
         res.send(data)
     })
 });
