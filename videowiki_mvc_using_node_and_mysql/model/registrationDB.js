@@ -33,7 +33,7 @@ let create_data = (create) =>{
     return knex('post').insert(create)
 };
 
-// 5
+// 5 dono 5.1
 let get_data = (registration_id) => {
     return knex('reg')
     .join("user_post","reg.registration_id","=","user_post.registration_id")

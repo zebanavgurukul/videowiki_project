@@ -131,7 +131,7 @@ registration.post('/create_data', (req,res) => {
 });
 
 // 5
-registration.get('/data_get/:registration_id', (req,res) => {
+registration.get('/likes_get/:registration_id', (req,res) => {
     let registration_id = req.params.registration_id;
     let data = registrationDB.get_data(registration_id)
     data.then((result) => {
@@ -142,35 +142,23 @@ registration.get('/data_get/:registration_id', (req,res) => {
             }
         }
         res.send({likes_counter})
-        let Dislikes_counter = 0
-        for(let j = 0; j < result.length; j++) {
-            if (result[j]['Dislikes'] == 1){
-                Dislikes_counter += 1
-            }
-        }
-        res.send({Dislikes_counter})
     })
 });
 
-// 5
-registration.get('/get_data/:id', (req,res) => {
-    let id = req.params.id;
-    let post_data = registrationDB.dataUserId(id)
-    post_data.then((result)=>{
-        var likes = result[0]['likes']
-        var Dislikes = result[0]['Dislikes']
-    var likes_counter = 0
-    var Dislikes_counter = 0
-    if (likes == 1){
-        likes_counter += 1
-        res.json({likes_counter})
+// 5.1
+registration.get('/Dislikes_get/:registration_id', (req,res) => {
+    let registration_id = req.params.registration_id
+    let data = registrationDB.get_data(registration_id)
+    data.then((result) => {
+    let Dislikes_counter = 0
+    for(let j = 0; j < result.length; j++) {
+        if (result[j]['Dislikes'] == 1){
+            Dislikes_counter += 1
+        }
     }
-    else if (Dislikes == 1){
-        Dislikes_counter += 1
-        res.json({Dislikes_counter})
-    }
+    res.send({Dislikes_counter})
     })
-});
+})
 
 // 6
 registration.get('/reverse/:registration_id',(req,res) => {
