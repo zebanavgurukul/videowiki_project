@@ -4,20 +4,20 @@ const jwt = require('jsonwebtoken');
 const registrationDB   = require("../model/registrationDB")
 
 // 1
-// registration.post('/Register', (req,res) => {
-//     var main_data = req.body.params
-//     let add = {
-//         registration_id : main_data.registration_id,
-//         email : main_data.email,
-//         password : main_data.password,
-//         first_name : main_data.first_name,
-//         last_name : main_data.last_name
-//     }
-//     registrationDB.registration(add)
-//     .then(()=>{
-//         res.send('insert')
-//     })
-// });
+registration.post('/Register', (req,res) => {
+    var main_data = req.body.params
+    let add = {
+        registration_id : main_data.registration_id,
+        email : main_data.email,
+        password : main_data.password,
+        first_name : main_data.first_name,
+        last_name : main_data.last_name
+    }
+    registrationDB.registration(add)
+    .then(()=>{
+        res.send('insert')
+    })
+});
 
 registration.post('/Register', (req,res) => {
     let add = {

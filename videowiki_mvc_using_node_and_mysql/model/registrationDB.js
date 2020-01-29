@@ -81,4 +81,18 @@ let data_delete = (id) => {
     return knex('bio').where('id',id).del()
 };
 
-module.exports = {registration,registration_login,else_login,create,data_put,create_post_data,get_data,create_data,dataUserId,reverse_data,post_bio,bio_get,bio_id,bio_update,data_delete}
+module.exports = {registration,
+    registration_login,
+    else_login,
+    create,
+    data_put,
+    create_post_data,
+    get_data,
+    create_data,
+    dataUserId,
+    reverse_data,
+    post_bio,
+    bio_get,
+    bio_id,
+    bio_update,
+    data_delete}
