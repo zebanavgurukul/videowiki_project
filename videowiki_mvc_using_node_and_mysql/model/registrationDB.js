@@ -64,11 +64,21 @@ let post_bio = (post_data) => {
 // 7.1
 let bio_get = () => {
     return knex('bio').select("*")
-}
+};
 
 // 7.2
 let bio_id = (id) => {
     return knex('bio').select('*').where('id',id)
-}
+};
 
-module.exports = {registration,registration_login,else_login,create,data_put,create_post_data,get_data,create_data,dataUserId,reverse_data,post_bio,bio_get,bio_id}
+// 7.3
+let bio_update = (updata,id) => {
+    return knex('bio').update(updata).where('id',id)
+};
+
+// 7.4
+let data_delete = (id) => {
+    return knex('bio').where('id',id).del()
+};
+
+module.exports = {registration,registration_login,else_login,create,data_put,create_post_data,get_data,create_data,dataUserId,reverse_data,post_bio,bio_get,bio_id,bio_update,data_delete}

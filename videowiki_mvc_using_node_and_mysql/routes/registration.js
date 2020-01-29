@@ -195,6 +195,8 @@ registration.get('/bio',(req,res) => {
     registrationDB.bio_get()
     .then((result) => {
         res.send(result)
+    }).catch((err)=>{
+        res.send(err)
     })
 });
 
@@ -204,6 +206,40 @@ registration.get('/boi_get/:id', (req,res) => {
     registrationDB.bio_id(id)
     .then((result) => {
         res.send(result)
+    }).catch((err)=>{
+        res.send(err)
+    })
+});
+
+// 7.3
+registration.put('/bio_put/:id', (req,res) => {
+    let id = req.params.id
+    let updata = {
+        id : req.body.id,
+        Name : req.body.Name,
+        Birthday : req.body.Birthday,
+        Mobile : req.body.Mobile,
+        Gender : req.body.Gender,
+        Location : req.body.Location,
+        Education : req.body.Education
+    }
+    registrationDB.bio_update(updata,id)
+    .then(() => {
+        res.send('insert')
+    }).catch((err)=>{
+        res.send(err)
+    })
+});
+
+// 7.4
+registration.delete('/delete/:id', (req,res) => {
+    var id = req.params.id
+    registrationDB.data_delete(id)
+    .then(() => {
+        res.send('delete')
+    }).catch((err) => {
+        console.log(err)
+        res.send(err)
     })
 });
 
