@@ -23,6 +23,11 @@ let create = (create_data) =>{
     return knex('user_post').insert(create_data)
 };
 
+// 3.1
+let data_put = (updata,post_id) => {
+    return knex('user_post').update(updata).where("post_id",post_id)
+};
+
 // 4
 let create_data = (create) =>{
     return knex('post').insert(create)
@@ -56,4 +61,4 @@ let post_bio = (post_data) => {
     return knex('bio').insert(post_data)
 };
 
-module.exports = {registration,registration_login,else_login,create,create_post_data,get_data,create_data,dataUserId,reverse_data,post_bio}
+module.exports = {registration,registration_login,else_login,create,data_put,create_post_data,get_data,create_data,dataUserId,reverse_data,post_bio}

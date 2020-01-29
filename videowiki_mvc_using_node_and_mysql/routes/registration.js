@@ -95,6 +95,23 @@ registration.post('/create_post/:registration_id', (req,res) => {
     })
 });
 
+// 3.1
+registration.put('/put_data/:post_id', (req,res) => {
+    var post_id = req.params.post_id
+    var updata = {
+        "registration_id" : req.body.registration_id,
+        "img_url" : req.body.img_url,
+        "caption" : req.body.caption
+    }
+    registrationDB.data_put(updata,post_id)
+    .then(()=>{
+        res.json("table updated!...")
+    }).catch((err)=>{
+        res.send(err)
+    })
+});
+
+
 // 4
 registration.post('/create_data', (req,res) => {
     let create = {
@@ -133,7 +150,7 @@ registration.get('/data_get/:registration_id', (req,res) => {
         }
         res.send({Dislikes_counter})
     })
-})
+});
 
 // 5
 registration.get('/get_data/:id', (req,res) => {
