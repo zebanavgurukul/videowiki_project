@@ -172,7 +172,7 @@ registration.get('/reverse/:registration_id',(req,res) => {
 });
 
 // 7
-registration.post('/bio', (req,res) => {
+registration.post('/bio_post', (req,res) => {
     let post_data = {
         id : req.body.id,
         Name : req.body.Name,
@@ -187,6 +187,23 @@ registration.post('/bio', (req,res) => {
         res.send('insert')
     }).catch((err)=>{
         res.send(err)
+    })
+});
+
+// 7.1
+registration.get('/bio',(req,res) => {
+    registrationDB.bio_get()
+    .then((result) => {
+        res.send(result)
+    })
+});
+
+// 7.2
+registration.get('/boi_get/:id', (req,res) => {
+    let id = req.params.id
+    registrationDB.bio_id(id)
+    .then((result) => {
+        res.send(result)
     })
 });
 

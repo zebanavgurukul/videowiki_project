@@ -61,4 +61,14 @@ let post_bio = (post_data) => {
     return knex('bio').insert(post_data)
 };
 
-module.exports = {registration,registration_login,else_login,create,data_put,create_post_data,get_data,create_data,dataUserId,reverse_data,post_bio}
+// 7.1
+let bio_get = () => {
+    return knex('bio').select("*")
+}
+
+// 7.2
+let bio_id = (id) => {
+    return knex('bio').select('*').where('id',id)
+}
+
+module.exports = {registration,registration_login,else_login,create,data_put,create_post_data,get_data,create_data,dataUserId,reverse_data,post_bio,bio_get,bio_id}
