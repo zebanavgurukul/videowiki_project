@@ -81,6 +81,15 @@ let data_delete = (id) => {
     return knex('bio').where('id',id).del()
 };
 
+// 8
+let home_page = (registration_id) => {
+    return knex('reg')
+    .join('user_post','reg.registration_id', 'user_post.post_id')
+    .join('post','user_post.post_id', '=', 'post.post_id')
+    .select('reg.first_name','last_name','user_post.img_url','caption','post.likes','Dislikes','comments')
+    .where('reg.registration_id',registration_id)
+};
+
 module.exports = {registration,
     registration_login,
     else_login,
@@ -95,4 +104,5 @@ module.exports = {registration,
     bio_get,
     bio_id,
     bio_update,
-    data_delete}
+    data_delete,
+    home_page}

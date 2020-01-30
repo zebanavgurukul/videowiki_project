@@ -238,9 +238,40 @@ registration.delete('/delete/:id', (req,res) => {
     .then(() => {
         res.send('delete')
     }).catch((err) => {
-        console.log(err)
         res.send(err)
     })
 });
+
+// 8
+registration.get('/get_page/:registration_id',(req,res) => {
+    let registration_id = req.params.registration_id
+    registrationDB.home_page(registration_id)
+    .then((result) => {
+    let likes_counter = 0
+    for(let i = 0; i<result.length; i++) {
+        if(result[i]['likes'] == 1){
+            likes_counter += 1
+        }
+    }
+    let Dislikes_counter = 0
+    for(let j = 0; j < result.length; j++) {
+        if (result[j]['Dislikes'] == 1){
+            Dislikes_counter += 1
+        }
+    }
+    let data_result = {
+        "first_name": result[0]['first_name'],
+        "last_name": result[0]['last_name'],
+        "img_url": result[0]['img_url'],
+        "caption": result[0]['caption'],
+        "likes": likes_counter,
+        "Dislikes": Dislikes_counter,
+        "comments": result[0]['comments']
+    }
+    res.send(data_result)
+    }).catch((err) => {
+        res.send(err)
+    })
+})
 
 module.exports = registration
