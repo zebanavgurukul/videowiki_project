@@ -90,6 +90,15 @@ let home_page = (registration_id) => {
     .where('reg.registration_id',registration_id)
 };
 
+// 9
+let page_data = (id) => {
+    return knex('bio')
+    .join('post','bio.id', '=', 'post.id')
+    .join('user_post','post.post_id', '=', 'user_post.post_id')
+    .select('*')
+    .where('bio.id',id)
+};
+
 module.exports = {registration,
     registration_login,
     else_login,
@@ -105,4 +114,5 @@ module.exports = {registration,
     bio_id,
     bio_update,
     data_delete,
-    home_page}
+    home_page,
+    page_data}

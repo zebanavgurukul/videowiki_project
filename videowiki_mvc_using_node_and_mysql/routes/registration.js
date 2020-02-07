@@ -174,7 +174,6 @@ registration.get('/reverse/:registration_id',(req,res) => {
 // 7
 registration.post('/bio_post', (req,res) => {
     let post_data = {
-        id : req.body.id,
         Name : req.body.Name,
         Birthday : req.body.Birthday,
         Mobile : req.body.Mobile,
@@ -273,5 +272,27 @@ registration.get('/get_page/:registration_id',(req,res) => {
         res.send(err)
     })
 })
+
+// 9
+registration.get('/get/:id', (req,res) => {
+    let id = req.params.id
+    registrationDB.page_data(id)
+    .then((data) => {
+    let page = {
+        "Name": data[0]['Name'],
+        "Birthday": data[0]['Birthday'],
+        "Mobile": data[0]['Mobile'],
+        "Gender": data[0]['Gender'],
+        "Location": data[0]['Location'],
+        "Education": data[0]['Education'],
+        "img_url": data[0]['img_url'],
+        "comments": data[0]['comments'],
+        "caption": data[0]['caption']
+    }
+    res.send(page)
+    }).catch((err) => {
+        res.send(err)
+    })
+});
 
 module.exports = registration
