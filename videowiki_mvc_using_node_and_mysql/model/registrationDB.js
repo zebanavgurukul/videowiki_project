@@ -98,6 +98,13 @@ let page_data = () => {
     .select('user_post.post_id','img_url','caption','bio.Name','post.comments')
 };
 
+let page = () => {
+    return knex('reg')
+    .join('user_post','reg.registration_id', '=', 'user_post.registration_id')
+    .join('post','user_post.post_id','post.id')
+    .select('user_post.post_id','img_url','caption','reg.first_name','post.comments')
+}
+
 module.exports = {registration,
     registration_login,
     else_login,
@@ -114,4 +121,5 @@ module.exports = {registration,
     bio_update,
     data_delete,
     home_page,
-    page_data}
+    page_data,
+    page}

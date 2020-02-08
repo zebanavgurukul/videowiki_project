@@ -81,7 +81,6 @@ registration.post('/create_post/:registration_id', (req,res) => {
     data.then((data) => {
         var id_data = data[0]["registration_id"]
     let create_data = {
-        post_id : req.body.post_id,
         registration_id : id_data,
         img_url : req.body.img_url,
         caption : req.body.caption
@@ -117,7 +116,6 @@ registration.post('/create_data', (req,res) => {
     let create = {
         registration_id : req.body.registration_id,
         post_id : req.body.post_id,
-        id : req.body.id,
         likes : req.body.likes,
         Dislikes : req.body.Dislikes,
         comments : req.body.comments
@@ -276,6 +274,15 @@ registration.get('/get_page/:registration_id',(req,res) => {
 // 9
 registration.get('/get', (req,res) => {
     registrationDB.page_data()
+    .then((data) => {
+        res.send(data)
+    }).catch((err) => {
+        res.send(err)
+    })
+});
+
+registration.get('/get_page', (req,res) => {
+    registrationDB.page()
     .then((data) => {
         res.send(data)
     }).catch((err) => {
