@@ -94,8 +94,8 @@ let home_page = (registration_id) => {
 let page_data = () => {
     return knex('bio')
     .join('post','bio.id', '=', 'post.id')
-    .join('user_post','post.post_id', '=', 'user_post.post_id')
-    .select('bio.Name','post.comments','user_post.post_id','img_url','caption')
+    .join('user_post','post.id','user_post.post_id')
+    .select('user_post.post_id','img_url','caption','bio.Name','post.comments')
 };
 
 module.exports = {registration,
