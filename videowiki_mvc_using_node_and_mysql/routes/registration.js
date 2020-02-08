@@ -274,22 +274,10 @@ registration.get('/get_page/:registration_id',(req,res) => {
 })
 
 // 9
-registration.get('/get/:id', (req,res) => {
-    let id = req.params.id
-    registrationDB.page_data(id)
+registration.get('/get', (req,res) => {
+    registrationDB.page_data()
     .then((data) => {
-    let page = {
-        "Name": data[0]['Name'],
-        "Birthday": data[0]['Birthday'],
-        "Mobile": data[0]['Mobile'],
-        "Gender": data[0]['Gender'],
-        "Location": data[0]['Location'],
-        "Education": data[0]['Education'],
-        "img_url": data[0]['img_url'],
-        "comments": data[0]['comments'],
-        "caption": data[0]['caption']
-    }
-    res.send(page)
+        res.send(data)
     }).catch((err) => {
         res.send(err)
     })

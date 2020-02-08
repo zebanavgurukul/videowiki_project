@@ -91,12 +91,11 @@ let home_page = (registration_id) => {
 };
 
 // 9
-let page_data = (id) => {
+let page_data = () => {
     return knex('bio')
     .join('post','bio.id', '=', 'post.id')
     .join('user_post','post.post_id', '=', 'user_post.post_id')
-    .select('*')
-    .where('bio.id',id)
+    .select('bio.Name','post.comments','user_post.post_id','img_url','caption')
 };
 
 module.exports = {registration,
